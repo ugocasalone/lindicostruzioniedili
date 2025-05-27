@@ -25,7 +25,8 @@ const locales = {
 };
 
 export default defineConfig({
-  // site: "https://example.com/",
+  site: "https://ugocasalone.com",
+  base: '/lindicostruzioniedili.github.io/',
   trailingSlash: "always",
   build: {
     format: "directory",
