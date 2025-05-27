@@ -1,0 +1,187 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Projects data
+const projects = [
+  {
+    title: 'Villa Monferrato',
+    category: 'Ristrutturazione Completa',
+    description: 'Ristrutturazione completa di una villa storica con piscina, rispettando l\'architettura originale mentre si integrano comfort moderni.',
+    image: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg',
+    slug: '/portfolio/villa-monferrato'
+  },
+  {
+    title: 'Cascina Rinnovata',
+    category: 'Ristrutturazione Cascina',
+    description: 'Trasformazione di una cascina abbandonata in una moderna casa di campagna con ampi spazi aperti e materiali tradizionali.',
+    image: 'https://images.pexels.com/photos/3958958/pexels-photo-3958958.jpeg',
+    slug: '/portfolio/cascina-rinnovata'
+  },
+  {
+    title: 'Appartamento Centro',
+    category: 'Ristrutturazione Appartamento',
+    description: 'Ristrutturazione di un appartamento nel centro storico, con recupero di pavimenti originali e soffitti a volta.',
+    image: 'https://images.pexels.com/photos/1571470/pexels-photo-1571470.jpeg',
+    slug: '/portfolio/appartamento-centro'
+  },
+  {
+    title: 'Villa con Piscina',
+    category: 'Piscina e Esterni',
+    description: 'Realizzazione di una piscina a sfioro con area relax integrata nel paesaggio collinare del Monferrato.',
+    image: 'https://images.pexels.com/photos/261327/pexels-photo-261327.jpeg',
+    slug: '/portfolio/villa-piscina'
+  },
+  {
+    title: 'Casale Restaurato',
+    category: 'Ristrutturazione Cascina',
+    description: 'Restauro conservativo di un casale del XVIII secolo con recupero di elementi architettonici originali.',
+    image: 'https://images.pexels.com/photos/2079246/pexels-photo-2079246.jpeg',
+    slug: '/portfolio/casale-restaurato'
+  },
+  {
+    title: 'Loft Industriale',
+    category: 'Ristrutturazione Appartamento',
+    description: 'Conversione di uno spazio industriale in un moderno loft residenziale con ampie vetrate e soffitti alti.',
+    image: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg',
+    slug: '/portfolio/loft-industriale'
+  }
+];
+---
+
+<Layout title="Portfolio">
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg" 
+        alt="I nostri progetti" 
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-800/80"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl text-white">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+          {t('portfolio.title')}
+        </h1>
+        <p class="text-xl text-primary-100">
+          {t('portfolio.subtitle')}
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Portfolio Grid -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <!-- Filter Categories (Optional) -->
+      <div class="flex flex-wrap justify-center mb-12">
+        <button class="filter-btn mx-2 mb-3 px-4 py-2 bg-primary-600 text-white rounded-md">Tutti</button>
+        <button class="filter-btn mx-2 mb-3 px-4 py-2 bg-primary-100 text-primary-800 hover:bg-primary-200 rounded-md">Ristrutturazione Appartamento</button>
+        <button class="filter-btn mx-2 mb-3 px-4 py-2 bg-primary-100 text-primary-800 hover:bg-primary-200 rounded-md">Ristrutturazione Cascina</button>
+        <button class="filter-btn mx-2 mb-3 px-4 py-2 bg-primary-100 text-primary-800 hover:bg-primary-200 rounded-md">Piscina e Esterni</button>
+        <button class="filter-btn mx-2 mb-3 px-4 py-2 bg-primary-100 text-primary-800 hover:bg-primary-200 rounded-md">Ristrutturazione Completa</button>
+      </div>
+      
+      <!-- Projects Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {projects.map((project, index) => (
+          <div class="reveal project-card" data-category={project.category} style={`animation-delay: ${index * 100}ms`}>
+            <a href={project.slug} class="block group">
+              <div class="bg-white rounded-lg overflow-hidden shadow-lg h-full">
+                <div class="relative h-64 overflow-hidden">
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-60 group-hover:opacity-70 transition-opacity"></div>
+                  <div class="absolute bottom-4 left-4">
+                    <span class="inline-block px-3 py-1 bg-accent-500 text-white text-xs font-medium rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="p-6">
+                  <h3 class="text-xl font-serif font-semibold mb-2 text-primary-800 group-hover:text-primary-600 transition-colors">{project.title}</h3>
+                  <p class="text-gray-700 mb-4">{project.description}</p>
+                  <div class="inline-flex items-center text-primary-600 group-hover:text-primary-800 transition-colors">
+                    Esplora progetto
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1 transform group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-700 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 reveal">
+        Hai un progetto in mente?
+      </h2>
+      <p class="text-primary-100 text-xl max-w-3xl mx-auto mb-8 reveal">
+        Dai vita al tuo progetto di ristrutturazione con la nostra esperienza e professionalità.
+      </p>
+      <a 
+        href="/contact" 
+        class="inline-block px-8 py-4 bg-accent-500 text-white font-medium uppercase tracking-wider text-sm rounded-md hover:bg-accent-600 transition-colors reveal"
+      >
+        {t('contact.title')}
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Basic filtering functionality
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Reset all buttons
+        filterButtons.forEach(btn => {
+          btn.classList.remove('bg-primary-600', 'text-white');
+          btn.classList.add('bg-primary-100', 'text-primary-800');
+        });
+        
+        // Highlight selected button
+        button.classList.remove('bg-primary-100', 'text-primary-800');
+        button.classList.add('bg-primary-600', 'text-white');
+        
+        const category = button.textContent?.trim();
+        
+        // Show all if "Tutti" is selected
+        if (category === 'Tutti') {
+          projectCards.forEach(card => {
+            card.style.display = 'block';
+          });
+          return;
+        }
+        
+        // Filter projects
+        projectCards.forEach(card => {
+          if (card.dataset.category === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

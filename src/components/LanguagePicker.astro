@@ -1,0 +1,62 @@
+---
+import { languages } from "../i18n/ui";
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const pathname = Astro.url.pathname;
+
+// Function to create URL for language switching
+const createLanguageUrl = (targetLang: string) => {
+  // Strip the current language from the path if present
+  let newPath = pathname.replace(/^\/(en\/)?/, '/');
+  
+  // Add the language prefix for non-default languages (en)
+  if (targetLang !== 'it') {
+    newPath = `/${targetLang}${newPath}`;
+  }
+  
+  return newPath;
+};
+---
+
+<div class="relative inline-block text-left">
+  <button type="button" id="language-menu-button" class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-primary-800 hover:text-primary-600 focus:outline-none">
+    <span>{languages[lang]}</span>
+    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <div id="language-menu" class="hidden origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="language-menu-button">
+      {Object.entries(languages).map(([code, label]) => (
+        <a 
+          href={createLanguageUrl(code)} 
+          class={`block px-4 py-2 text-sm ${lang === code ? 'bg-primary-100 text-primary-800' : 'text-gray-700 hover:bg-gray-100'}`}
+          role="menuitem"
+        >
+          {label}
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const button = document.getElementById('language-menu-button');
+    const menu = document.getElementById('language-menu');
+    
+    // Toggle menu on button click
+    button?.addEventListener('click', () => {
+      menu?.classList.toggle('hidden');
+    });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+      if (button && !button.contains(event.target as Node) && menu && !menu.contains(event.target as Node)) {
+        menu.classList.add('hidden');
+      }
+    });
+  });
+</script>

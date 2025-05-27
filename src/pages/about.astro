@@ -1,0 +1,241 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Team members
+const team = [
+  {
+    name: 'Roberto Bianchi',
+    role: 'Fondatore & Direttore',
+    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg',
+    bio: 'Con oltre 30 anni di esperienza nel settore, Roberto ha fondato l\'azienda nel 1998. La sua profonda conoscenza dell\'architettura locale e delle tecniche di costruzione tradizionali è la base del nostro approccio unico.'
+  },
+  {
+    name: 'Luisa Rossi',
+    role: 'Architetto',
+    image: 'https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg',
+    bio: 'Luisa si è specializzata in restauro di edifici storici. Il suo talento nel fondere elementi moderni con strutture tradizionali ha dato vita ad alcuni dei nostri progetti più acclamati.'
+  },
+  {
+    name: 'Marco Verdi',
+    role: 'Capomastro',
+    image: 'https://images.pexels.com/photos/1516680/pexels-photo-1516680.jpeg',
+    bio: 'La precisione e l\'attenzione al dettaglio di Marco garantiscono che ogni progetto sia eseguito secondo gli standard più elevati. Supervisiona ogni cantiere con dedizione e professionalità.'
+  },
+  {
+    name: 'Giulia Ferrari',
+    role: 'Interior Designer',
+    image: 'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg',
+    bio: 'Il tocco creativo di Giulia trasforma gli spazi interni in ambienti accoglienti e funzionali. La sua conoscenza dei materiali e delle tendenze del design italiano e internazionale arricchisce ogni progetto.'
+  }
+];
+
+// Timeline events
+const timeline = [
+  {
+    year: '1998',
+    title: 'Fondazione',
+    description: 'Roberto Bianchi fonda l\'azienda con l\'obiettivo di preservare l\'architettura tradizionale del Monferrato integrando tecnologie moderne.'
+  },
+  {
+    year: '2005',
+    title: 'Espansione',
+    description: 'L\'azienda amplia la sua offerta includendo servizi di design d\'interni e consulenza architettonica completa.'
+  },
+  {
+    year: '2010',
+    title: 'Premio Eccellenza',
+    description: 'Vinciamo il premio regionale per l\'eccellenza nelle ristrutturazioni conservative di edifici storici.'
+  },
+  {
+    year: '2015',
+    title: 'Innovazione Sostenibile',
+    description: 'Integriamo pratiche sostenibili in tutti i nostri progetti, focalizzandoci sull\'efficienza energetica e materiali eco-compatibili.'
+  },
+  {
+    year: '2023',
+    title: 'Oggi',
+    description: 'Continuiamo a crescere mantenendo lo stesso impegno per la qualità e il rispetto della tradizione che ci ha contraddistinto fin dall\'inizio.'
+  }
+];
+
+// Values
+const values = [
+  {
+    title: 'Qualità',
+    description: 'Utilizziamo solo materiali pregiati e tecniche consolidate per garantire risultati duraturi e raffinati.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+  },
+  {
+    title: 'Tradizione',
+    description: 'Rispettiamo e preserviamo le tecniche costruttive locali e l\'estetica tradizionale del Monferrato.',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'
+  },
+  {
+    title: 'Innovazione',
+    description: 'Integriamo soluzioni moderne per migliorare comfort, efficienza e sostenibilità senza compromettere lo stile tradizionale.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z'
+  },
+  {
+    title: 'Integrità',
+    description: 'Lavoriamo con onestà e trasparenza, mantenendo sempre le promesse fatte ai nostri clienti.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+  }
+];
+---
+
+<Layout title="Chi Siamo">
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.pexels.com/photos/7937386/pexels-photo-7937386.jpeg" 
+        alt="Il nostro team al lavoro" 
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-primary-800/80"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl text-white">
+        <h1 class="text-4xl md:text-5xl font-serif font-bold mb-4">
+          {t('about.title')}
+        </h1>
+        <p class="text-xl text-primary-100">
+          {t('about.subtitle')}
+        </p>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Our Story -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div class="reveal">
+          <h2 class="text-3xl font-serif font-bold mb-6 text-primary-800">
+            La nostra storia
+          </h2>
+          <p class="text-lg text-gray-700 mb-6">
+            {t('about.description')}
+          </p>
+          <p class="text-gray-700 mb-6">
+            Nata dalla passione per l'architettura tradizionale e dalla volontà di preservare il patrimonio edilizio del Monferrato, la nostra azienda si è evoluta fino a diventare un punto di riferimento per chi cerca qualità, rispetto della tradizione e innovazione.
+          </p>
+          <p class="text-gray-700">
+            {t('about.mission')}
+          </p>
+        </div>
+        
+        <div class="reveal">
+          <img 
+            src="https://images.pexels.com/photos/1723637/pexels-photo-1723637.jpeg" 
+            alt="Cascina ristrutturata nel Monferrato" 
+            class="rounded-lg shadow-xl"
+          />
+        </div>
+      </div>
+      
+      <!-- Timeline -->
+      <div class="max-w-4xl mx-auto my-20">
+        <h2 class="text-3xl font-serif font-bold mb-12 text-center text-primary-800 reveal">
+          La nostra evoluzione
+        </h2>
+        
+        <div class="relative">
+          <!-- Vertical line -->
+          <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-primary-200"></div>
+          
+          {timeline.map((event, index) => (
+            <div class={`relative z-10 mb-12 ${index % 2 === 0 ? 'text-right' : 'text-left'} reveal`}>
+              <div class={`flex items-center ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                <div class={`${index % 2 === 0 ? 'order-last ml-4' : 'order-first mr-4'}`}>
+                  <div class="bg-primary-600 text-white text-lg font-bold px-4 py-2 rounded-md">
+                    {event.year}
+                  </div>
+                </div>
+                
+                <div class="bg-accent-500 rounded-full h-6 w-6 border-4 border-white shadow-xl"></div>
+              </div>
+              
+              <div class={`mt-3 ${index % 2 === 0 ? 'pr-12' : 'pl-12'}`}>
+                <h3 class="text-xl font-serif font-semibold text-primary-800 mb-2">{event.title}</h3>
+                <p class="text-gray-700">{event.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Our Values -->
+  <section class="py-16 bg-primary-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold mb-12 text-center text-primary-800 reveal">
+        I nostri valori
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {values.map((value, index) => (
+          <div class="bg-white p-6 rounded-lg shadow-lg text-center reveal" style={`animation-delay: ${index * 100}ms`}>
+            <div class="inline-flex items-center justify-center h-16 w-16 rounded-full bg-primary-100 text-primary-600 mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={value.icon} />
+              </svg>
+            </div>
+            <h3 class="text-xl font-serif font-semibold text-primary-800 mb-3">{value.title}</h3>
+            <p class="text-gray-700">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Our Team -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-serif font-bold mb-12 text-center text-primary-800 reveal">
+        Il nostro team
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {team.map((member, index) => (
+          <div class="text-center reveal" style={`animation-delay: ${index * 100}ms`}>
+            <div class="relative mb-6 mx-auto w-48 h-48 overflow-hidden rounded-full border-4 border-white shadow-lg">
+              <img 
+                src={member.image} 
+                alt={member.name} 
+                class="absolute inset-0 w-full h-full object-cover"
+              />
+            </div>
+            <h3 class="text-xl font-serif font-semibold text-primary-800 mb-1">{member.name}</h3>
+            <p class="text-accent-600 font-medium mb-4">{member.role}</p>
+            <p class="text-gray-700 px-4">{member.bio}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA Section -->
+  <section class="py-20 bg-primary-700 text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 reveal">
+        Lavora con noi
+      </h2>
+      <p class="text-primary-100 text-xl max-w-3xl mx-auto mb-8 reveal">
+        Sei un professionista appassionato di architettura tradizionale e ristrutturazioni? Unisciti al nostro team e contribuisci a preservare la bellezza del Monferrato.
+      </p>
+      <a 
+        href="/contact" 
+        class="inline-block px-8 py-4 bg-accent-500 text-white font-medium uppercase tracking-wider text-sm rounded-md hover:bg-accent-600 transition-colors reveal"
+      >
+        Contattaci
+      </a>
+    </div>
+  </section>
+</Layout>
